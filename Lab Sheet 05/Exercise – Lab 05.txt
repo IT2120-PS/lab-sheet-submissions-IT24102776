@@ -1,0 +1,32 @@
+setwd("C:\\Users\\it24102776\\Desktop\\lab5")
+delivery_times <- read.table("Exercise.txt", header = TRUE)
+names(delivery_times)[1] <- "Delivery_Time"
+
+head(delivery_times)
+
+# 2. Histogram with 9 class intervals (20 to 70, right-open intervals)
+breaks <- seq(20, 70, length.out = 10)   # 9 intervals
+hist(delivery_times$Delivery_Time,
+     breaks = breaks,
+     right = FALSE,   # right-open intervals
+     main = "Histogram of Delivery Times",
+     xlab = "Delivery Time (minutes)",
+     col = "skyblue", border = "black")
+
+# 3. Comment on shape of distribution
+
+hist_data <- hist(delivery_times$Delivery_Time, 
+                  breaks = breaks, 
+                  right = FALSE, 
+                  plot = FALSE)
+
+cum_freq <- cumsum(hist_data$counts)
+
+upper_limits <- hist_data$breaks[-1]
+
+
+plot(upper_limits, cum_freq, type = "o",
+     main = "Cumulative Frequency Polygon (Ogive)",
+     xlab = "Delivery Time (minutes)",
+     ylab = "Cumulative Frequency",
+     col = "blue", pch = 16)
